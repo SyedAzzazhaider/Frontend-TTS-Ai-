@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const API_URL = 'http://127.0.0.1:5000/api/v1/pipeline';
-const BACKEND_BASE_URL = 'http://127.0.0.1:5000';
+const API_URL = 'https://voiceflow-backend-pu41.onrender.com/api/v1/pipeline';
+const BACKEND_BASE_URL = 'https://voiceflow-backend-pu41.onrender.com';
 
 export const useTTS = () => {
   const [loading, setLoading] = useState(false);
