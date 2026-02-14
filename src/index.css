@@ -1,0 +1,258 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for theming */
+:root {
+  --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.18);
+}
+
+.dark {
+  --glass-bg: rgba(15, 23, 42, 0.6);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Base styles */
+* {
+  @apply transition-colors duration-200;
+}
+
+body {
+  @apply font-body antialiased;
+  @apply bg-gradient-to-br from-slate-50 via-blue-50 to-purple-50;
+  @apply dark:from-slate-950 dark:via-slate-900 dark:to-slate-950;
+  @apply text-slate-900 dark:text-slate-100;
+  @apply overflow-x-hidden;
+}
+
+/* Animated gradient background */
+.animated-gradient {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.dark .animated-gradient {
+  background: linear-gradient(-45deg, #1e1b4b, #312e81, #4c1d95, #1e3a8a);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+/* Glass morphism */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+}
+
+.dark .glass-strong {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Gradient text */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r;
+  @apply from-primary-600 via-accent-600 to-primary-700;
+  @apply dark:from-primary-400 dark:via-accent-400 dark:to-primary-500;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  @apply hover:bg-slate-400 dark:hover:bg-slate-600;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply relative overflow-hidden;
+  @apply bg-gradient-to-r from-primary-600 to-accent-600;
+  @apply hover:from-primary-700 hover:to-accent-700;
+  @apply text-white font-semibold;
+  @apply px-8 py-3 rounded-xl;
+  @apply shadow-lg shadow-primary-500/30;
+  @apply hover:shadow-xl hover:shadow-primary-500/40;
+  @apply transform hover:scale-105 active:scale-95;
+  @apply transition-all duration-200;
+}
+
+.btn-secondary {
+  @apply glass;
+  @apply text-slate-700 dark:text-slate-200;
+  @apply font-semibold px-8 py-3 rounded-xl;
+  @apply shadow-md hover:shadow-lg;
+  @apply transform hover:scale-105 active:scale-95;
+  @apply transition-all duration-200;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+}
+
+.dark .btn-secondary:hover {
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+}
+
+/* Floating elements */
+.floating-element {
+  @apply absolute rounded-full blur-3xl opacity-20;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-element:nth-child(2) {
+  animation-delay: -2s;
+  animation-duration: 8s;
+}
+
+.floating-element:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 10s;
+}
+
+/* Card hover effect */
+.card-hover {
+  @apply transform transition-all duration-300;
+  @apply hover:scale-[1.02] hover:shadow-2xl;
+}
+
+/* Shimmer effect */
+.shimmer {
+  @apply relative overflow-hidden;
+}
+
+.shimmer::after {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-full;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+.dark .shimmer::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+/* Loading skeleton */
+.skeleton {
+  @apply animate-pulse bg-slate-200 dark:bg-slate-800 rounded-lg;
+}
+
+/* Glow effect */
+.glow {
+  @apply shadow-lg shadow-primary-500/50;
+  @apply dark:shadow-primary-400/30;
+}
+
+/* Input styles */
+.input-field {
+  @apply glass-strong w-full px-4 py-3 rounded-xl;
+  @apply border-2 border-transparent;
+  @apply focus:border-primary-500 focus:ring-4 focus:ring-primary-500/20;
+  @apply placeholder:text-slate-400 dark:placeholder:text-slate-500;
+  @apply text-slate-900 dark:text-slate-100;
+  @apply transition-all duration-200;
+}
+
+/* Badge styles */
+.badge {
+  @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full;
+  @apply text-xs font-semibold;
+  @apply glass;
+}
+
+/* Dropdown area */
+.dropzone {
+  @apply glass border-2 border-dashed rounded-2xl;
+  @apply border-slate-300 dark:border-slate-700;
+  @apply hover:border-primary-500 dark:hover:border-primary-400;
+  @apply hover:bg-primary-50/50 dark:hover:bg-primary-950/30;
+  @apply transition-all duration-300 cursor-pointer;
+}
+
+.dropzone-active {
+  @apply border-primary-500 bg-primary-50 dark:bg-primary-950/50;
+  @apply scale-[1.02];
+}
+
+/* Audio player styles */
+.audio-controls {
+  @apply flex items-center gap-4 p-6 rounded-2xl glass-strong;
+  @apply border border-slate-200/50 dark:border-slate-700/50;
+}
+
+/* Toast notification */
+.toast {
+  @apply fixed bottom-8 right-8 z-50;
+  @apply glass-strong rounded-xl shadow-2xl;
+  @apply p-4 min-w-[300px] max-w-[500px];
+  @apply animate-slide-up;
+}
+
+/* Empty state */
+.empty-state {
+  @apply flex flex-col items-center justify-center;
+  @apply py-16 px-8 text-center;
+  @apply text-slate-500 dark:text-slate-400;
+}
+
+/* Section divider */
+.section-divider {
+  @apply relative w-full h-px my-12;
+  @apply bg-gradient-to-r from-transparent via-slate-300 to-transparent;
+  @apply dark:via-slate-700;
+}
+
+/* Responsive utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
