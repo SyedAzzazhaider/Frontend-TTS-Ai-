@@ -243,6 +243,39 @@ body {
   @apply dark:via-slate-700;
 }
 
+/* ============================================
+   Error Display Animations - For ErrorDisplay Component
+   ============================================ */
+
+/* Slide-in animation for error notifications */
+@keyframes slide-in {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+/* ----- Tailwind Configuration Reference ----- */
+/* If using tailwind.config.js, add this to theme.extend:
+   keyframes: {
+     'slide-in': {
+       '0%': { transform: 'translateX(400px)', opacity: '0' },
+       '100%': { transform: 'translateX(0)', opacity: '1' }
+     }
+   },
+   animation: {
+     'slide-in': 'slide-in 0.3s ease-out'
+   }
+*/
+
 /* Responsive utilities */
 @layer utilities {
   .text-balance {
