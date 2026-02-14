@@ -7,8 +7,8 @@ import InputSection from './components/InputSection';
 import LanguageControls from './components/LanguageControls';
 import ActionButtons from './components/ActionButtons';
 import AudioPlayer from './components/AudioPlayer';
-import EmptyState from './components/EmptyState';
-import LoadingSkeleton from './components/LoadingSkeleton';
+import EmptyState from './components/Emptystate';
+import LoadingSkeleton from './components/Loadingskeleton';
 import FeedbackToast from './components/FeedbackToast';
 import Footer from './components/Footer';
 
