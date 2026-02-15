@@ -109,8 +109,7 @@
 FRONTEND FIX - src/App.jsx
 Integration of ErrorDisplay component
 */
-
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useTTS } from './hooks/useTTS';
 import InputSection from './components/InputSection';
 import AudioPlayer from './components/AudioPlayer';
