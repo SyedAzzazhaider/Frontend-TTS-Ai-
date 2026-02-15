@@ -1,120 +1,9 @@
-// import { useState } from 'react';
-// import { ThemeProvider } from './contexts/ThemeContext';
-// import { useTTS } from './hooks/useTTS';
-// import Header from './components/Header';
-// import Hero from './components/Hero';
-// import InputSection from './components/InputSection';
-// import LanguageControls from './components/LanguageControls';
-// import ActionButtons from './components/ActionButtons';
-// import AudioPlayer from './components/AudioPlayer';
-// import EmptyState from './components/Emptystate';
-// import LoadingSkeleton from './components/Loadingskeleton';
-// import FeedbackToast from './components/FeedbackToast';
-// import Footer from './components/Footer';
-
-// function App() {
-//   const [textInput, setTextInput] = useState('');
-//   const [uploadedFile, setUploadedFile] = useState(null);
-//   const [toast, setToast] = useState(null);
-
-//   const { loading, error, audioUrl, detectedLanguage, generateAudio, clear } = useTTS();
-
-//   const handleGenerate = async () => {
-//     // Validation
-//     if (!textInput.trim() && !uploadedFile) {
-//       setToast({ message: 'Please enter text or upload a file', type: 'error' });
-//       return;
-//     }
-
-//     const input = uploadedFile || textInput;
-//     // Always use 'auto' for language detection
-//     const result = await generateAudio(input, 'auto');
-
-//     if (result.success) {
-//       setToast({ message: 'Audio generated successfully!', type: 'success' });
-//     } else {
-//       setToast({ message: result.error || 'Failed to generate audio', type: 'error' });
-//     }
-//   };
-
-//   const handleClear = () => {
-//     setTextInput('');
-//     setUploadedFile(null);
-//     clear();
-//     setToast({ message: 'All fields cleared', type: 'success' });
-//   };
-
-//   const handleClearFile = () => {
-//     setUploadedFile(null);
-//   };
-
-//   const isGenerateDisabled = !textInput.trim() && !uploadedFile;
-
-//   return (
-//     <ThemeProvider>
-//       <div className="min-h-screen relative overflow-hidden">
-//         {/* Animated background */}
-//         <div className="fixed inset-0 -z-10 animated-gradient opacity-50"></div>
-
-//         {/* Main content */}
-//         <div className="relative z-10">
-//           <Header />
-//           <Hero />
-          
-//           <main className="pb-12">
-//             <InputSection
-//               textValue={textInput}
-//               onTextChange={setTextInput}
-//               uploadedFile={uploadedFile}
-//               onFileUpload={setUploadedFile}
-//               onClearFile={handleClearFile}
-//             />
-
-//             <ActionButtons
-//               onGenerate={handleGenerate}
-//               onClear={handleClear}
-//               loading={loading}
-//               disabled={isGenerateDisabled}
-//             />
-
-//             {/* Show detected language badge after generation */}
-//             {detectedLanguage && <LanguageControls detectedLanguage={detectedLanguage} />}
-
-//             {/* Content States */}
-//             {loading && <LoadingSkeleton />}
-//             {!loading && !audioUrl && !error && <EmptyState />}
-//             {!loading && audioUrl && <AudioPlayer audioUrl={audioUrl} />}
-//           </main>
-
-//           <Footer />
-//         </div>
-
-//         {/* Toast notifications */}
-//         {toast && (
-//           <FeedbackToast
-//             message={toast.message}
-//             type={toast.type}
-//             onClose={() => setToast(null)}
-//           />
-//         )}
-//       </div>
-//     </ThemeProvider>
-//   );
-// }
-
-// export default App;
-
-
-/*
-FRONTEND FIX - src/App.jsx
-Integration of ErrorDisplay component
-*/
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useTTS } from './hooks/useTTS';
 import InputSection from './components/InputSection';
 import AudioPlayer from './components/AudioPlayer';
 import LanguageControls from './components/LanguageControls';
-import ErrorDisplay from './components/ErrorDisplay'; // NEW IMPORT
+import ErrorDisplay from './components/ErrorDisplay';
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -123,13 +12,13 @@ function App() {
   const [theme, setTheme] = useState('dark');
 
   // Use the updated useTTS hook
-  const { 
-    generateAudio, 
-    loading, 
-    audioUrl, 
-    error, 
-    clearError, // NEW: clearError function
-    detectedLanguage 
+  const {
+    generateAudio,
+    loading,
+    audioUrl,
+    error,
+    clearError,
+    detectedLanguage
   } = useTTS();
 
   const handleGenerate = async () => {
@@ -165,9 +54,9 @@ function App() {
   return (
     <div className={`min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'} transition-colors duration-300`}>
       {/* ERROR DISPLAY - PERSISTENT, DISMISSIBLE */}
-      <ErrorDisplay 
-        error={error} 
-        onDismiss={clearError} 
+      <ErrorDisplay
+        error={error}
+        onDismiss={clearError}
       />
 
       {/* Header */}
@@ -214,8 +103,8 @@ function App() {
             className={`
               px-8 py-4 rounded-lg font-semibold text-lg
               transform transition-all duration-200
-              ${loading 
-                ? 'bg-gray-400 cursor-not-allowed' 
+              ${loading
+                ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 hover:scale-105 shadow-lg'
               }
               text-white
@@ -238,8 +127,8 @@ function App() {
 
         {/* Audio Player */}
         {audioUrl && (
-          <AudioPlayer 
-            audioUrl={audioUrl} 
+          <AudioPlayer
+            audioUrl={audioUrl}
             theme={theme}
           />
         )}
@@ -251,7 +140,7 @@ function App() {
           Built with ❤️ by Syed Azzaz Haider Rizvi | VoiceFlow TTS © 2026
         </p>
         <p className="text-xs mt-2 text-gray-500">
-          Free Tier: Text & Documents up to 2MB | 
+          Free Tier: Text & Documents up to 2MB |
           <a href="mailto:support@voiceflow.com?subject=Premium%20Upgrade" className="text-blue-500 hover:underline ml-1">
             Upgrade to Premium
           </a>
